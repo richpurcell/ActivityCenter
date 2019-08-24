@@ -1,0 +1,61 @@
+@model Wrapper
+<div class="container">
+    <div class="banner" style="margin-top: 30px; display: block;">
+        <h1 style="display: inline-block; vertical-align: top;">Dojo Activity Center</h1>
+        <h4 style="display: inline-block; vertical-align: top; margin-left: 300px;">Welcome, @ViewBag.User.Name!</h4>
+        <a href="/logout" style="display: inline-block; vertical-align: top; margin-left: 70px;"><h4>Logout</h4></a>
+        <hr style="margin-top: 20px;">
+    </div>
+    <div class="table">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                <th scope="col">Activity</th>
+                <th scope="col">Date and Time</th>
+                <th scope="col">duration</th>
+                <th scope="col">Event Coordinator</th>
+                <th scope="col">No. of Participants</th>
+                <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var activity in Model.AllActivities){
+                    <tr>
+                        <td>
+                            <a href="/activity/@activity.ActivityId"><h4>@activity.Title</h4></a>
+                        </td>
+                        <td>
+                            <h4>@activity.ActivityDate.ToString("M/dd") @activity.ActivityTime.ToString("h:mmtt")</h4>
+                        </td>
+                        <td>
+                            <h4>@activity.Duration @activity.Multiplier</h4>
+                        </td>
+                        <td>
+                            <h4>@Model.AllUsers.FirstOrDefault(u=>u.UserId == activity.OrganizerId).Name</h4>
+                        </td>
+                        <td>
+                            <h4>@activity.Attendees.Count()</h4>
+                        </td>
+                        <td>
+                            @{
+                                if(activity.OrganizerId == ViewBag.UserId)
+                                {
+                                    <a href="/delete/@activity.ActivityId"><h4>Delete</h4></a>
+                                } else {
+                                    IEnumerable<int> yes = activity.Attendees.Select(att=>att.AttendeeId);
+                                    @if(yes.Contains((int)ViewBag.UserId)){
+                                        <a href="/leave/@activity.ActivityId"><h4>Leave</h4></a>
+                                    } else {
+                                        <a href="/join/@activity.ActivityId"><h4>Join</h4></a>
+                                    }
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a href="/new" style="margin-left: 930px;"><button class="btn btn-primary">New Activity</button></a>
+    </div>
+    
+</div>

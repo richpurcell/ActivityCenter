@@ -1,0 +1,53 @@
+@model DojoActivity
+<div class="container">
+    <div class="banner" style="margin-top: 30px;">
+        <h1 style="display: inline-block; vertical-align: top;">Dojo Activity Center</h1>
+        <a href="/home" style="display: inline-block; vertical-align: top; margin-left: 500px;"><h4>Home</h4></a>
+        <a href="/logout" style="display: inline-block; vertical-align: top; margin-left: 70px;"><h4>Logout</h4></a>
+        <hr style="margin-top: 20px;">
+    </div>
+    <h2 style="margin-top: 70px;">Create an Activity</h2>
+    <div class="form">
+        <form asp-action="AddActivity" asp-controller="Home" method="post">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <span asp-validation-for="Title"></span>
+                    <label asp-for="Title"></label>
+                    <input asp-for="Title" type="text" class="form-control" id="inputEmail4" placeholder="Title">
+                </div>
+                <div class="form-group col-md-6">
+                    <span asp-validation-for="ActivityTime"></span>
+                    <label asp-for="ActivityTime"></label>
+                    <input asp-for="ActivityTime" type="time" class="form-control" id="inputEmail4" placeholder="ActivityTime">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <span asp-validation-for="ActivityDate"></span>
+                    <label asp-for="ActivityDate"></label>
+                    <input asp-for="ActivityDate" type="date" class="form-control" id="inputEmail4" placeholder="ActivityDate">
+                </div>
+                <div class="form-group col-md-4">
+                    <span asp-validation-for="Duration"></span>
+                    <label asp-for="Duration"></label>
+                    <input asp-for="Duration" type="text" class="form-control" id="inputEmail4" placeholder="Duration">
+                </div>
+                <div class="form-group col-md-2">
+                    <span asp-validation-for="Multiplier"></span>
+                    <label asp-for="Multiplier"> </label>
+                    <select asp-for="Multiplier" type="text" class="form-control">
+                        <option value="Day(s)">Days</option>
+                        <option value="Hour(s)">Hours</option>
+                        <option value="Minute(s)">Minutes</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <span asp-validation-for="Description"></span>
+                    <label asp-for="Description"></label>
+                    <textarea asp-for="Description" type="text" class="form-control" cols="200" rows="10" id="inputEmail4" style="width:1100px;"></textarea>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-left: 930px;">Create Activity</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+@model DojoActivity
+<div class="container">
+    <div class="banner" style="margin-top: 30px; display: block;">
+        <h1 style="display: inline-block; vertical-align: top;">Dojo Activity Center</h1>
+        <a href="/home" style="display: inline-block; vertical-align: top; margin-left: 500px;"><h4>Home</h4></a>
+        <a href="/logout" style="display: inline-block; vertical-align: top; margin-left: 70px;"><h4>Logout</h4></a>
+        <hr style="margin-top: 20px;">
+    </div>
+    <div class="bar" style="display: block;">
+        <h2 style="margin-top: 70px; display: inline-block; vertical-align: top;">@ViewBag.ThisActivity.Title</h2>
+        <a href="/join/@Model.ActivityId" style="margin-top: 70px; margin-left: 600px; display: inline-block; vertical-align: top;"><button class="btn btn-primary">Join</button></a>
+    </div>
+    <div class="thisEvent" style="margin-left: 70px; margin-top: 30px; display: block;">
+        <h3 style="display: inline-block; vertical-align: top;">Event Coordinator:</h3>
+        <h3 style="display: inline-block; vertical-align: top; margin-left: 40px;">@ViewBag.Organizer.Name</h3>
+        <h3 style="margin-top: 40px;">Description:</h3>
+        <div class="desc">
+            <p>@ViewBag.ThisActivity.Description</p>
+        </div>
+    </div>
+    <div class="participants" style="margin-left: 70px; margin-top: 30px; display: block;">
+        <h3 style="margin-top: 40px;">Participants:</h3>
+        <ul>
+            @foreach(var part in @ViewBag.AllParticipants.Attendees)
+            {
+                <h4 style="margin: 20px;"><li>@part.Attendee.Name</li></h4>
+            }
+        </ul>
+    </div>
+</div>
